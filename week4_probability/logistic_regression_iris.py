@@ -54,7 +54,7 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y_onehot, test_size=0.3, random_state=42
 )
 
-n_features, n_classes = X_train.shape[1], y_train.shape[2]
+n_features, n_classes = X_train.shape[1], y_train.shape[1]
 print(f"训练集: {X_train.shape[0]} 条, 测试集: {X_test.shape[0]} 条")
 print(f"特征数: {n_features}, 类别数: {n_classes}")
 
@@ -226,5 +226,5 @@ print(f"交叉熵模型 — 准确率: {acc_ce:.2%}  终损: {losses_ce[-1]:.4f}
 print(f"MSE 模型    — 准确率: {acc_mse:.2%}  终损: {losses_mse[-1]:.4f}")
 print(f"交叉熵比 MSE 训练效果好 {acc_ce - acc_mse:.1%} 个点")
 print(f"{'=' * 50}")
-print("\n原因：MSE + Softmax 存在梯度饱和——模型自信地错时，ŷ(1-ŷ)≈0，梯度消失。")
-print("交叉熵数学上消掉了饱和项，梯度 = ŷ - y，干净高效。")
+print("\n原因：MSE + Softmax 存在梯度饱和——模型自信地错时，y_hat*(1-y_hat)≈0，梯度消失。")
+print("交叉熵数学上消掉了饱和项，梯度 = y_hat - y，干净高效。")
