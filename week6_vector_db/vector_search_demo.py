@@ -9,7 +9,14 @@ Week 6 动手实战：pgvector + HNSW 向量搜索全流程
 
 环境销毁：
     docker compose down -v
+
+注意：Hugging Face 在国内可能不通，自动使用 hf-mirror.com 镜像。
 """
+
+import os
+
+# 国内镜像加速，避免 Hugging Face 连接超时
+os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
 
 import time
 import psycopg2
