@@ -27,6 +27,8 @@ from sentence_transformers import SentenceTransformer
 # ————————————————————————————————————————————————————————————
 
 model = SentenceTransformer("BAAI/bge-small-zh-v1.5")
+dim = model.get_sentence_embedding_dimension()
+print(f"Model dimension: {dim}")
 
 conn = psycopg2.connect(
     host="localhost",
@@ -44,12 +46,12 @@ cur = conn.cursor()
 cur.execute("CREATE EXTENSION IF NOT EXISTS vector")
 cur.execute("DROP TABLE IF EXISTS documents")
 
-cur.execute("""
+cur.execute(f"""
     CREATE TABLE documents (
         id SERIAL PRIMARY KEY,
         title TEXT,
         content TEXT,
-        embedding vector(384)
+        embedding vector({dim})
     )
 """)
 
