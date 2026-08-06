@@ -56,15 +56,24 @@ cur.execute(f"""
 """)
 
 # ————————————————————————————————————————————————————————————
-# 3. 插入 1000 条文本向量
+# 3. 读取文本数据 + 插入向量
 # ————————————————————————————————————————————————————————————
 
-print("Generating 1000 embeddings...")
-documents = [
-    {"title": f"文档{i}", "content": f"这是第{i}篇关于AI和向量数据库的文档内容"}
-    for i in range(1000)
-]
+import pathlib
 
+# 从同级目录的 sample_texts.txt 读取多样化文本
+txt_path = pathlib.Path(__file__).parent / "sample_texts.txt"
+with open(txt_path, encoding="utf-8") as f:
+    source_texts = [line.strip() for line in f if line.strip()]
+
+# 填充到 1000 条（循环使用源文本）
+N = 1000
+documents = []
+for i in range(N):
+    content = source_texts[i % len(source_texts)]
+    documents.append({"title": f"文档{i}", "content": content})
+
+print(f"Generating {N} embeddings (source texts: {len(source_texts)})...")
 texts = [doc["content"] for doc in documents]
 embeddings = model.encode(texts)
 
