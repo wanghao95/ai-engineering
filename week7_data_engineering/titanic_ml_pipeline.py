@@ -7,7 +7,7 @@ Week 7 动手实战：数据工程与ML闭环 — 泰坦尼克号生存预测
 运行：
     python titanic_ml_pipeline.py
 
-数据来源：seaborn 内置 Titanic 数据集（自动下载），也可从 Kaggle 下载 train.csv
+数据来源：Kaggle Titanic train.csv（自动从 GitHub 下载）
 """
 
 import numpy as np
@@ -23,13 +23,21 @@ from sklearn.preprocessing import LabelEncoder
 # ============================================================
 
 print("=" * 60)
-print("1. 加载泰坦尼克号数据集（seaborn 内置）")
+print("1. 加载泰坦尼克号数据集（Kaggle train.csv）")
 print("=" * 60)
 
-import seaborn as sns
+# Kaggle 标准 Titanic 数据集，包含 name/cabin 等完整列
+URL = "https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv"
+raw = pd.read_csv(URL)
+raw.columns = raw.columns.str.lower()  # 统一小写列名
 
-raw = sns.load_dataset("titanic")
-print(f"数据维度: {raw.shape}")  # (891, 15)
+# 派生 seaborn 数据集中的列，方便后续代码使用
+raw["deck"] = raw["cabin"].str[0]                           # 从 Cabin 首字母提取甲板层
+embark_map = {"S": "Southampton", "C": "Cherbourg", "Q": "Queenstown"}
+raw["embark_town"] = raw["embarked"].map(embark_map)        # 从 embarked 映射城市名
+raw["alone"] = (raw["sibsp"] + raw["parch"] == 0)           # 是否独自一人
+
+print(f"数据维度: {raw.shape}")  # (891, 15+)
 print(f"\n前5行:")
 print(raw.head())
 print(f"\n各列类型与缺失值:")
