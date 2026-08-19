@@ -1,4 +1,4 @@
- """
+"""
 50 行 NumPy 手写神经网络 —— MNIST 手写数字识别
 不依赖 PyTorch / TensorFlow，只用 NumPy 实现前向传播 + 反向传播。
 """
@@ -6,11 +6,11 @@ import numpy as np
 
 # ---------- 1. 加载数据 ----------
 import os
-from sklearn.datasets import fetch_openml
-DATA_HOME = os.path.join(os.path.dirname(__file__), 'data')   # 缓存到项目目录
-mnist = fetch_openml('mnist_784', version=1, as_frame=False,
-                     parser='liac-arff', data_home=DATA_HOME)
-X, y = mnist.data / 255.0, mnist.target.astype(int)          # 归一化到 [0,1]
+NPZ = os.path.join(os.path.dirname(__file__), 'mnist.npz')
+if not os.path.exists(NPZ):
+    raise FileNotFoundError("先运行 parse_arff.py 生成 mnist.npz")
+d = np.load(NPZ)
+X, y = d['X'] / 255.0, d['y']                  # 归一化到 [0,1]
 X_train, y_train = X[:60000], y[:60000]
 X_test,  y_test  = X[60000:], y[60000:]
 
