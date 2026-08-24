@@ -24,6 +24,12 @@
 │   └── vector_search_demo.py        #   pgvector + HNSW 全流程：建表→插入→索引→调参
 ├── week7_data_engineering/          # 数据工程与ML闭环
 │   └── titanic_ml_pipeline.py       #   泰坦尼克号：脏数据vs干净数据→特征工程→调参→混淆矩阵
+├── week8_neural_network/            # 神经网络与反向传播（50 行 NumPy 手写）
+│   ├── numpy_nn_mnist.py           #   50 行神经网络：前向+反向传播，MNIST 训练 20 epochs
+│   ├── quick_verify.py             #   快速验证：5 epochs，跑通即确认代码正确
+│   ├── parse_arff.py               #   数据解析工具：mnist_784.arff.gz → mnist.npz
+│   ├── mnist.npz                   #   MNIST 数据集（已解析，随仓库提供）
+│   └── data/openml/                #   MNIST 原始数据（openml 下载）
 └── (每周更新...)
 ```
 
@@ -32,6 +38,7 @@
 - Python ≥ 3.8
 - Week 2-4：numpy, matplotlib, scikit-learn, scipy
 - Week 5-7：pandas, scikit-learn, seaborn
+- Week 8：仅需 numpy（已含在上方公共依赖）；MNIST 数据 `mnist.npz` 已随仓库提供，无需下载
 - Week 6：额外需要 Docker（启动 pgvector 容器）
 
 ```bash
@@ -72,6 +79,11 @@ docker compose down                       # 用完后关掉
 # Week 7 — 泰坦尼克号 ML 全流程
 cd ../week7_data_engineering
 python titanic_ml_pipeline.py             # 脏数据vs干净数据→特征工程→调参
+
+# Week 8 — 50 行 NumPy 神经网络（数据已随仓库提供，开箱即跑）
+cd ../week8_neural_network
+python quick_verify.py                    # 快速验证：5 epochs，确认代码正确
+python numpy_nn_mnist.py                  # 完整训练：20 epochs
 ```
 
 ## 开发环境建议
