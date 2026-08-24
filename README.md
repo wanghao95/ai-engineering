@@ -22,6 +22,8 @@
 ├── week6_vector_db/                 # 向量数据库与 HNSW 索引
 │   ├── docker-compose.yml           #   pgvector 容器配置
 │   └── vector_search_demo.py        #   pgvector + HNSW 全流程：建表→插入→索引→调参
+├── week7_data_engineering/          # 数据工程与ML闭环
+│   └── titanic_ml_pipeline.py       #   泰坦尼克号：脏数据vs干净数据→特征工程→调参→混淆矩阵
 └── (每周更新...)
 ```
 
@@ -29,11 +31,15 @@
 
 - Python ≥ 3.8
 - Week 2-4：numpy, matplotlib, scikit-learn, scipy
+- Week 5-7：pandas, scikit-learn, seaborn
 - Week 6：额外需要 Docker（启动 pgvector 容器）
 
 ```bash
 # 公共依赖（Week 2-4）
 pip install numpy matplotlib scikit-learn scipy
+
+# Week 5-7 额外依赖
+pip install pandas scikit-learn seaborn
 
 # Week 6 额外依赖
 pip install psycopg2-binary sentence-transformers
@@ -62,6 +68,10 @@ cd week6_vector_db
 docker compose up -d                      # 启动 pgvector 容器
 python vector_search_demo.py              # 跑全流程
 docker compose down                       # 用完后关掉
+
+# Week 7 — 泰坦尼克号 ML 全流程
+cd ../week7_data_engineering
+python titanic_ml_pipeline.py             # 脏数据vs干净数据→特征工程→调参
 ```
 
 ## 开发环境建议
