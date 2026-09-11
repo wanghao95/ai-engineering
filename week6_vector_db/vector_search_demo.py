@@ -27,7 +27,7 @@ from sentence_transformers import SentenceTransformer
 # ————————————————————————————————————————————————————————————
 
 model = SentenceTransformer("BAAI/bge-small-zh-v1.5")
-dim = model.get_embedding_dimension()
+dim = model.get_sentence_embedding_dimension()
 print(f"Model dimension: {dim}")
 
 conn = psycopg2.connect(
