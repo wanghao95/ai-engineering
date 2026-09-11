@@ -93,7 +93,7 @@ plt.gca().add_patch(plt.Rectangle((0, ta_index), n_words, 1, fill=False, edgecol
 
 plt.tight_layout()
 
-# 6. 直接输出到文章目录，覆盖旧的 fig3_real_attention_heatmap.png
+# 6. 直接输出到文章目录
 save_path = os.path.normpath(os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
     "..", "..", "articles", "week10", "images", "fig3_real_attention_heatmap.png"))
